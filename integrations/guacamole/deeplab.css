@@ -1,0 +1,13 @@
+/* DeepLab brand (Signal) - https://github.com/fkeil/deeplab-brand */
+body, input, button, select, textarea { font-family: Inter, "Segoe UI", system-ui, sans-serif; }
+.login-ui { background: #0F1729 url('app/ext/deeplab-branding/images/login-bg.svg') center / cover no-repeat; }
+.login-ui .login-dialog { border-radius: 14px; box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+.login-ui .login-dialog .logo {
+  background: url('app/ext/deeplab-branding/images/logo.svg') center / contain no-repeat;
+  width: 14em; height: 4em; margin: .5em auto;
+}
+button, input[type="submit"], a.button, .button {
+  background-color: #2F6FED; border-color: #2559C4; color: #fff;
+}
+button:hover, input[type="submit"]:hover, a.button:hover, .button:hover { background-color: #2559C4; }
+a, a:visited { color: #2F6FED; }

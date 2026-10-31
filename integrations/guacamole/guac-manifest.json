@@ -1,0 +1,13 @@
+{
+  "guacamoleVersion": "1.6.0",
+  "name": "DeepLab Branding",
+  "namespace": "deeplab-branding",
+  "css": ["deeplab.css"],
+  "html": ["favicon.html"],
+  "translations": ["translations/en.json"],
+  "resources": {
+    "images/logo.svg": "image/svg+xml",
+    "images/favicon.png": "image/png",
+    "images/login-bg.svg": "image/svg+xml"
+  }
+}
