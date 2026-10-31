@@ -1,0 +1,32 @@
+/* DeepLab brand tokens: "Signal" (chosen 2026-10-31) */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  /* Core palette */
+  --dl-ink: #0F1729;          /* dark surfaces, headings on light */
+  --dl-signal: #2F6FED;       /* primary brand / buttons (white text 4.55:1) */
+  --dl-signal-hover: #2559C4; /* hover / pressed (white text 6.35:1) */
+  --dl-signal-light: #5B8DEF; /* brand blue on dark backgrounds (5.53:1 on ink) */
+  --dl-accent: #22C3EE;       /* highlight: ONLY on dark bg or as decoration, never text on white (2.08:1) */
+  --dl-paper: #F5F6F8;        /* light page background */
+  --dl-white: #FFFFFF;
+
+  /* Neutrals */
+  --dl-text: #0F1729;
+  --dl-text-muted: #64748B;   /* 4.76:1 on white */
+  --dl-border: #E2E5EA;
+
+  /* Status */
+  --dl-success: #15803D;
+  --dl-warning: #B45309;
+  --dl-danger: #DC2626;
+
+  /* Type */
+  --dl-font-sans: "Inter", "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --dl-font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  /* Shape */
+  --dl-radius-sm: 6px;
+  --dl-radius: 10px;
+  --dl-radius-lg: 14px;
+}
