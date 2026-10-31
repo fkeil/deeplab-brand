@@ -3,7 +3,8 @@
 Chosen 2026-10-31. Calm, technical, dependable: navy and blue, one cyan highlight.
 
 ## Name
-- In text: **DeepLab** (capital D, capital L). Products: **DeepLab BKP**.
+- In text: **DeepLab** (capital D, capital L).
+- Products: **DeepLab Strata** (backup, DR, RMM; formerly DeepLab BKP). See `products/strata/`.
 - In the logo: lowercase **deeplab** wordmark.
 - Domain for services: `deeplab.work`.
 
@@ -54,5 +55,5 @@ Example: "Backup finished. 3 files skipped, see details." Not: "Awesome! Your da
 
 ## Applying it
 - `tokens.css` has every value as CSS variables.
-- **DeepLab BKP portal:** already uses Signal blue. To align it: sidebar `#141A26` to Ink `#0F1729`, text `#1D2330` to Ink, system font to Inter, and replace the purple "DB" icon with the mark. (Not done; product work happens in its own thread.)
+- **DeepLab Strata (formerly BKP):** see `products/strata/README.md`.
 - **Cloudflare Access login page:** see `cloudflare-login.md`.
