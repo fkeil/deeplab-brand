@@ -1,0 +1,63 @@
+{
+  "_comment": "Names table for the DeepLab product family. To rename a product, change name/wordmark here and rerun family/build.py; every lockup, icon and sheet is rebuilt from this file. If you change an id, the folder products/<id>/ changes too: delete the old folder by hand (the script warns about folders it no longer owns).",
+  "endorser": {
+    "name": "DeepLab",
+    "wordmark": "deeplab"
+  },
+  "products": [
+    {
+      "id": "central",
+      "name": "Central",
+      "wordmark": "central",
+      "role": "Platform & portal (MSP and customer console)",
+      "motif": "central"
+    },
+    {
+      "id": "strata",
+      "name": "Strata",
+      "wordmark": "strata",
+      "role": "Backup & disaster recovery",
+      "motif": "strata",
+      "readme": "hand"
+    },
+    {
+      "id": "control",
+      "name": "Control",
+      "wordmark": "control",
+      "role": "Remote monitoring & management (RMM)",
+      "motif": "control"
+    },
+    {
+      "id": "ai-guard",
+      "name": "AI Guard",
+      "wordmark": "ai guard",
+      "role": "AI usage & leak monitoring",
+      "motif": "aiguard"
+    },
+    {
+      "id": "endpoint-watch",
+      "name": "Endpoint Watch",
+      "wordmark": "endpoint watch",
+      "role": "Endpoint behaviour monitor (monitors, never blocks)",
+      "motif": "endpoint-watch",
+      "bundle": "watch"
+    },
+    {
+      "id": "network-watch",
+      "name": "Network Watch",
+      "wordmark": "network watch",
+      "role": "Network monitor & firewall config backup",
+      "motif": "network-watch",
+      "bundle": "watch"
+    }
+  ],
+  "bundles": [
+    {
+      "id": "watch",
+      "name": "Watch",
+      "wordmark": "watch",
+      "role": "Bundle: Endpoint Watch + Network Watch",
+      "members": ["endpoint-watch", "network-watch"]
+    }
+  ]
+}
