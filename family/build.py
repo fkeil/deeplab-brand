@@ -390,13 +390,17 @@ def build_master(T, endorser):
 
 
 # ---------------------------------------------------------------- sheets
+NUMBERS = {5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten"}
+
+
 def sheet_overview(T, endorser, products, bundles):
     W = 1680
     pad = 64
     out = []
     y = pad
     out.append(T.text("DeepLab product family", 700, 40, pad, y + 36, INK))
-    out.append(T.text("One platform, six products. Generated from family/products.json.", 400, 20, pad, y + 72, MUTED))
+    count = NUMBERS.get(len(products), str(len(products)))
+    out.append(T.text("One platform, %s products. Generated from family/products.json." % count, 400, 20, pad, y + 72, MUTED))
     y += 120
     # master logo row
     out.append(T.text("MASTER", 700, 13, pad, y, MUTED))
@@ -405,7 +409,8 @@ def sheet_overview(T, endorser, products, bundles):
     mst = lockup_stacked(T, ["master"], endorser["wordmark"], None, "light", "DeepLab")
     out.append(nest(mst, pad + 420, y + 12, 0.75))
     y += 20 + 150
-    # product cards: 3 x 2
+    # product cards: 3 per row, as many rows as the table needs
+    rows = math.ceil(len(products) / 3)
     out.append(T.text("PRODUCTS", 700, 13, pad, y, MUTED))
     y += 20
     cw, ch, gx, gy = (W - 2 * pad - 2 * 24) / 3, 230, 24, 24
@@ -418,14 +423,16 @@ def sheet_overview(T, endorser, products, bundles):
         lk = lockup_h(T, p["motif"], endorser["wordmark"], p["wordmark"], "light", "")
         sc = min(0.62, (cw - 48) / lk[1])
         out.append(nest(lk, cx + 24, cy + 140, sc))
-        out.append(T.text(p["role"], 400, 15, cx + 24, cy + 205, MUTED))
+        # role line: 15 px, shrunk only if it would leave the card
+        rs = min(15, 15 * (cw - 48) / T.width(p["role"], 400, 15))
+        out.append(T.text(p["role"], 400, rs, cx + 24, cy + 205, MUTED))
         # small sizes next to the big icon
         out.append('<g transform="translate(%s %s) scale(0.5)">%s</g>' % (f(cx + 136), f(cy + 24), icon_inner(p["motif"])))
         out.append('<g transform="translate(%s %s) scale(0.25)">%s</g>' % (f(cx + 180), f(cy + 24), icon_inner(p["motif"], TILE_GLYPH_16)))
         out.append('<g transform="translate(%s %s) scale(0.75)">%s</g>' % (f(cx + 136), f(cy + 72), motif(p["motif"], "light")))
-    y += 2 * ch + gy + 48
-    # dark band
-    bh = 330
+    y += rows * ch + (rows - 1) * gy + 48
+    # dark band: one 120-unit lockup row per card row
+    bh = 90 + rows * 120
     out.append('<rect x="0" y="%s" width="%s" height="%s" fill="%s"/>' % (y, W, bh, INK))
     out.append(T.text("ON DARK", 700, 13, pad, y + 40, "#94A3B8"))
     for i, p in enumerate(products):
