@@ -4,7 +4,7 @@
 |---|---|
 | [`products.json`](products.json) | **The names table.** One row per product (id, public name, lowercase wordmark, role, motif) plus bundles |
 | [`build.py`](build.py) | Builds every product mark, icon, lockup, the stacked master logo and the sheets below from the table |
-| [`family-overview.svg`](family-overview.svg) / `.png` | All six products with icons, lockups (light and dark) and the Watch bundle |
+| [`family-overview.svg`](family-overview.svg) / `.png` | All products with icons, lockups (light and dark) and the Watch bundle |
 | [`family-system.svg`](family-system.svg) / `.png` | Construction: grid, live area, keylines, tile, colour roles, lockup spacing |
 | [`template-mark.svg`](template-mark.svg) | Working template for drawing a new mark (guides in their own group) |
 

@@ -49,6 +49,13 @@
       "role": "Network monitor & firewall config backup",
       "motif": "network-watch",
       "bundle": "watch"
+    },
+    {
+      "id": "aware",
+      "name": "Aware",
+      "wordmark": "aware",
+      "role": "Security awareness: phishing simulation & training",
+      "motif": "aware"
     }
   ],
   "bundles": [

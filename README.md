@@ -20,6 +20,7 @@ All files are generated from [family/products.json](family/products.json). Namin
 | DeepLab AI Guard | <img src="products/ai-guard/ai-guard-logo.svg" height="28" alt="DeepLab AI Guard"> | <img src="products/ai-guard/ai-guard-icon.svg" width="32" alt=""> | [products/ai-guard](products/ai-guard/) |
 | DeepLab Endpoint Watch | <img src="products/endpoint-watch/endpoint-watch-logo.svg" height="28" alt="DeepLab Endpoint Watch"> | <img src="products/endpoint-watch/endpoint-watch-icon.svg" width="32" alt=""> | [products/endpoint-watch](products/endpoint-watch/) |
 | DeepLab Network Watch | <img src="products/network-watch/network-watch-logo.svg" height="28" alt="DeepLab Network Watch"> | <img src="products/network-watch/network-watch-icon.svg" width="32" alt=""> | [products/network-watch](products/network-watch/) |
+| DeepLab Aware | <img src="products/aware/aware-logo.svg" height="28" alt="DeepLab Aware"> | <img src="products/aware/aware-icon.svg" width="32" alt=""> | [products/aware](products/aware/) |
 | DeepLab Watch (bundle) | <img src="products/watch/watch-logo.svg" height="28" alt="DeepLab Watch"> | (none) | [products/watch](products/watch/) |
 
 ## Hotlinking

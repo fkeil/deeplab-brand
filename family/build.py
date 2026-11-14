@@ -96,6 +96,19 @@ def spark(cx, cy, r, waist):
     return "M" + " ".join("%s %s" % (f(x), f(y)) for x, y in pts) + "Z"
 
 
+def disc(cx, cy, r):
+    """Full circle as a path (so holes can be cut with fill-rule evenodd)."""
+    return "M%s %sa%s %s 0 1 0 %s 0a%s %s 0 1 0 -%s 0Z" % (
+        f(cx - r), f(cy), f(r), f(r), f(2 * r), f(r), f(r), f(2 * r))
+
+
+def stadium(cx, y0, y1, w):
+    """Vertical bar with round ends, from y0 to y1, w wide."""
+    h = w / 2
+    return "M%s %sa%s %s 0 0 1 %s 0V%sa%s %s 0 0 1 -%s 0Z" % (
+        f(cx - h), f(y0 + h), f(h), f(h), f(w), f(y1 - h), f(h), f(h), f(w))
+
+
 def arc(cx, cy, r, a0, a1):
     """Arc from angle a0 to a1 (degrees, clockwise on screen)."""
     x0, y0 = cx + r * math.cos(math.radians(a0)), cy + r * math.sin(math.radians(a0))
@@ -152,6 +165,14 @@ def motif(key, mode):
                 '<circle cx="11.5" cy="32" r="5.25" fill="%s"/>' % P +
                 '<circle cx="52.5" cy="32" r="5.25" fill="%s"/>' % P +
                 '<circle cx="32" cy="32" r="7.5" fill="%s"/>' % A)
+    if key == "aware":
+        # Envelope, flap on the master's 2:1 slope; where the seal would be, one
+        # cyan alert seal with a knocked-out "!": a suspicious e-mail, spotted.
+        # The flap stops at the seal's edge so nothing shows through the "!".
+        return ('<rect x="8.75" y="14.5" width="46.5" height="35" rx="8" %s/>' % stroke(P, so) +
+                '<path d="M11 16.75 25.21 23.86M53 16.75 38.79 23.86" %s/>' % stroke(P) +
+                '<path d="%s%s%s" fill="%s" fill-rule="evenodd"/>'
+                % (disc(32, 30.5, 9.5), stadium(32, 23.5, 31.75, 4), disc(32, 35.5, 2.25), A))
     raise KeyError(key)
 
 
@@ -383,13 +404,17 @@ def build_master(T, endorser):
 
 
 # ---------------------------------------------------------------- sheets
+NUMBERS = {5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten"}
+
+
 def sheet_overview(T, endorser, products, bundles):
     W = 1680
     pad = 64
     out = []
     y = pad
     out.append(T.text("DeepLab product family", 700, 40, pad, y + 36, INK))
-    out.append(T.text("One platform, six products. Generated from family/products.json.", 400, 20, pad, y + 72, MUTED))
+    count = NUMBERS.get(len(products), str(len(products)))
+    out.append(T.text("One platform, %s products. Generated from family/products.json." % count, 400, 20, pad, y + 72, MUTED))
     y += 120
     # master logo row
     out.append(T.text("MASTER", 700, 13, pad, y, MUTED))
@@ -398,7 +423,8 @@ def sheet_overview(T, endorser, products, bundles):
     mst = lockup_stacked(T, ["master"], endorser["wordmark"], None, "light", "DeepLab")
     out.append(nest(mst, pad + 420, y + 12, 0.75))
     y += 20 + 150
-    # product cards: 3 x 2
+    # product cards: 3 per row
+    rows = math.ceil(len(products) / 3)
     out.append(T.text("PRODUCTS", 700, 13, pad, y, MUTED))
     y += 20
     cw, ch, gx, gy = (W - 2 * pad - 2 * 24) / 3, 230, 24, 24
@@ -416,9 +442,9 @@ def sheet_overview(T, endorser, products, bundles):
         out.append('<g transform="translate(%s %s) scale(0.5)">%s</g>' % (f(cx + 136), f(cy + 24), icon_inner(p["motif"])))
         out.append('<g transform="translate(%s %s) scale(0.25)">%s</g>' % (f(cx + 180), f(cy + 24), icon_inner(p["motif"], TILE_GLYPH_16)))
         out.append('<g transform="translate(%s %s) scale(0.75)">%s</g>' % (f(cx + 136), f(cy + 72), motif(p["motif"], "light")))
-    y += 2 * ch + gy + 48
+    y += rows * ch + (rows - 1) * gy + 48
     # dark band
-    bh = 330
+    bh = 90 + rows * 120
     out.append('<rect x="0" y="%s" width="%s" height="%s" fill="%s"/>' % (y, W, bh, INK))
     out.append(T.text("ON DARK", 700, 13, pad, y + 40, "#94A3B8"))
     for i, p in enumerate(products):
@@ -472,7 +498,7 @@ def grid_panel(T, key, x, y, u, title):
     return "".join(o)
 
 
-def sheet_system(T):
+def sheet_system(T, products):
     W, H = 1680, 1060
     o = ['<rect width="%d" height="%d" fill="%s"/>' % (W, H, PAPER)]
     o.append(T.text("Family construction", 700, 40, 64, 100, INK))
@@ -488,9 +514,8 @@ def sheet_system(T):
     o.append(T.text("Ink tile, radius 14/64. Glyph at 75 % (8-56).", 400, 15, x0, 548, MUTED))
     o.append(T.text("16 px favicon: glyph at 87.5 %.", 400, 15, x0, 570, MUTED))
     # 16/32 strip
-    for i, (k, sc) in enumerate((("central", TILE_GLYPH_16), ("strata", TILE_GLYPH_16), ("control", TILE_GLYPH_16),
-                                 ("aiguard", TILE_GLYPH_16), ("endpoint-watch", TILE_GLYPH_16), ("network-watch", TILE_GLYPH_16))):
-        o.append('<g transform="translate(%d 590) scale(.25)">%s</g>' % (x0 + i * 24, icon_inner(k, sc)))
+    for i, k in enumerate(p["motif"] for p in products):
+        o.append('<g transform="translate(%d 590) scale(.25)">%s</g>' % (x0 + i * 24, icon_inner(k, TILE_GLYPH_16)))
         o.append('<g transform="translate(%d 616) scale(.5)">%s</g>' % (x0 + i * 40, icon_inner(k)))
     # colour roles
     x1 = 900
@@ -574,7 +599,7 @@ def main():
         build_bundle(T, endorser, b, products)
     build_master(T, endorser)
     sheet_overview(T, endorser, products, bundles)
-    sheet_system(T)
+    sheet_system(T, products)
     write("family/template-mark.svg", template_svg())
     owned = {p["id"] for p in products} | {b["id"] for b in bundles}
     for d in sorted(os.listdir(os.path.join(ROOT, "products"))):
