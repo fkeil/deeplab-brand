@@ -49,6 +49,13 @@
       "role": "Network monitor & firewall config backup",
       "motif": "network-watch",
       "bundle": "watch"
+    },
+    {
+      "id": "aware",
+      "name": "Aware",
+      "wordmark": "aware",
+      "role": "Security awareness: training, knowledge tests and phishing simulation",
+      "motif": "aware"
     }
   ],
   "bundles": [
@@ -57,7 +64,10 @@
       "name": "Watch",
       "wordmark": "watch",
       "role": "Bundle: Endpoint Watch + Network Watch",
-      "members": ["endpoint-watch", "network-watch"]
+      "members": [
+        "endpoint-watch",
+        "network-watch"
+      ]
     }
   ]
 }

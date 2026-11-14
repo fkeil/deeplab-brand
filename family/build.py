@@ -152,6 +152,13 @@ def motif(key, mode):
                 '<circle cx="11.5" cy="32" r="5.25" fill="%s"/>' % P +
                 '<circle cx="52.5" cy="32" r="5.25" fill="%s"/>' % P +
                 '<circle cx="32" cy="32" r="7.5" fill="%s"/>' % A)
+    if key == "aware":
+        # Security awareness: a message (envelope) that makes you pause — one
+        # cyan alert spark rising from it. No hook (cliche) and no eye (Watch).
+        return ('<rect x="8.75" y="24.5" width="38" height="30.75" rx="6" %s/>' % stroke(P, so) +
+                '<path d="M14.5 31 27.75 41 41 31" %s/>' % stroke(P) +
+                '<path d="%s" fill="%s" stroke="%s" stroke-width="2" stroke-linejoin="round"/>'
+                % (spark(48.5, 16, 8.5, 2.4), A, A))
     raise KeyError(key)
 
 
